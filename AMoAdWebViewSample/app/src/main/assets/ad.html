@@ -1,0 +1,47 @@
+<!doctype html>
+<head>
+    <meta charset="utf-8" />
+    <meta name='viewport' content='width=device-width,initial-scale=1.0,minimum-scale=1.0' />
+    <style>
+        body { margin: 0px; }
+        div.amoad_frame { margin: 0px; width: 300px; height: 250px; overflow: hidden; }
+    </style>
+    <!-- InView 検知タグ ( data-sid 属性にアドタグの sid を指定します ) -->
+    <script src="https://j.amoad.com/js/viewability.js" type="text/javascript" charset="utf-8" data-sid="62056d310111552c000000..."></script>
+</head>
+<body>
+    <!-- 広告 ID 連携用スクリプト -->
+    <script type="text/javascript">
+    (function() {
+        var currentScript = document.currentScript;
+
+        function receiveAMoAdOption(event) {
+            if (!event.data.amoadOption) { return; }
+
+            var option = event.data.amoadOption;
+
+            // AMoAd Zone: [ディスプレイ・サンプル・アドタグ]
+            var div = document.createElement('div');
+            div.setAttribute('class', 'amoad_frame sid_62056d310111552c000000...'); // アドタグの class 属性の値を設定します
+            div.setAttribute('data-idfa', option.idfa);
+            div.setAttribute('data-id-type', 'idfa');
+            div.setAttribute('data-optout', option.optout);
+            currentScript.insertAdjacentElement('afterend', div);
+
+            var script = document.createElement('script');
+            script.setAttribute('src', 'https://j.amoad.com/js/aa.js');
+            script.setAttribute('type', 'text/javascript');
+            script.setAttribute('charset', 'utf-8');
+            div.insertAdjacentElement('afterend', script);
+
+            window.removeEventListener('message', receiveAMoAdOption);
+        }
+        window.addEventListener('message', receiveAMoAdOption);
+
+        var iframe = document.createElement('iframe');
+        iframe.setAttribute('src', 'amoadscheme://');
+        iframe.setAttribute("style", 'display:none;');
+        currentScript.insertAdjacentElement('afterend', iframe);
+    })();
+    </script>
+</body>

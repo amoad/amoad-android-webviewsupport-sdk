@@ -1,0 +1,33 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion compile_version
+    buildToolsVersion buildtool_version
+
+    defaultConfig {
+        applicationId "com.amoad.sample.amoadwebviewsample"
+        minSdkVersion min_version
+        targetSdkVersion target_version
+        versionCode 1
+        versionName "1.0"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+    }
+}
+
+dependencies {
+    implementation project(':AMoAdWebViewSupport')
+    implementation "com.android.support:appcompat-v7:$support_version"
+    implementation "com.google.android.gms:play-services-ads:$playservices_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+}
